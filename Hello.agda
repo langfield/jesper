@@ -1,3 +1,7 @@
+module Hello where
+
+open import Data.Bool
+
 data Greeting : Set where
   hello : Greeting
 
@@ -11,9 +15,6 @@ data Nat : Set where
 _+_ : Nat → Nat → Nat
 zero    + y = y
 (suc x) + y = suc (x + y)
-
-not : Bool → Bool
-not = {!!}
 
 example : Nat
 example = {! zero + zero !}
