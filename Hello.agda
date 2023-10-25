@@ -16,5 +16,7 @@ _+_ : Nat → Nat → Nat
 zero    + y = y
 (suc x) + y = suc (x + y)
 
-example : Nat
-example = {! zero + zero !}
+halve : Nat → Nat
+halve zero = zero
+halve (suc zero) = zero
+halve (suc (suc n)) = suc (halve n)
