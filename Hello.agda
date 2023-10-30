@@ -1,6 +1,5 @@
 module Hello where
 
-open import Data.Bool
 open import Data.Nat hiding (_*_)
 
 data Greeting : Set where
@@ -10,11 +9,23 @@ greet : Greeting
 greet = hello
 
 halve : ℕ → ℕ
-halve zero = zero
-halve (suc zero) = zero
+halve 0 = 0
+halve (suc 0) = 0
 halve (suc (suc n)) = suc (halve n)
 
 _*_ : ℕ → ℕ → ℕ
-0 * _ = 0
-_ * 0 = 0
-(suc x) * y = x * y + y
+_ * 0       = 0
+x * (suc y) = x * y + x
+
+data Bool : Set where
+  true : Bool
+  false : Bool
+
+not : Bool → Bool
+not true = false
+not false = true
+
+_&&_ : Bool → Bool → Bool
+false && _ = false
+true && true = true
+true && false = false
