@@ -29,3 +29,8 @@ _&&_ : Bool → Bool → Bool
 false && _ = false
 true && true = true
 true && false = false
+
+_||_ : Bool → Bool → Bool
+false || false = false
+false || true = true
+true || _ = true
