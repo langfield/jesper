@@ -34,3 +34,21 @@ _||_ : Bool → Bool → Bool
 false || false = false
 false || true = true
 true || _ = true
+
+id : (A : Set) → A → A
+id A x = x
+
+id' : {A : Set} → A → A
+id' x = x
+
+if_then_else_ : {A : Set} → Bool → A → A → A
+if true then x else y = x
+if false then x else y = y
+
+data List (A : Set) : Set where
+  [] : List A
+  _::_ : A → List A → List A
+
+data _×_ (A B : Set) : Set where
+  _,_ : A → B → A × B
+infixr 4 _,_
