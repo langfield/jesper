@@ -48,7 +48,12 @@ if false then x else y = y
 data List (A : Set) : Set where
   [] : List A
   _::_ : A → List A → List A
+infixr 5 _::_
 
 data _×_ (A B : Set) : Set where
   _,_ : A → B → A × B
 infixr 4 _,_
+
+length : {A : Set} → List A → ℕ
+length [] = 0
+length (_ :: xs) = 1 + length xs

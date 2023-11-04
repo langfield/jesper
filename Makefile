@@ -1,2 +1,2 @@
 clean:
-	rm -f *.agdai
+	rm -rf *.agdai _build
