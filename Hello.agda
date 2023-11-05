@@ -14,7 +14,7 @@ halve (suc 0) = 0
 halve (suc (suc n)) = suc (halve n)
 
 _*_ : ℕ → ℕ → ℕ
-_ * 0       = 0
+_ * 0 = 0
 x * (suc y) = x * y + x
 
 data Bool : Set where
@@ -57,3 +57,11 @@ infixr 4 _,_
 length : {A : Set} → List A → ℕ
 length [] = 0
 length (_ :: xs) = 1 + length xs
+
+_++_ : {A : Set} → List A → List A → List A
+[] ++ ys = ys
+(x :: xs) ++ ys = x :: (xs ++ ys)
+
+map : {A B : Set} → (A → B) → List A → List B
+map _ [] = []
+map f (x :: xs) = f x :: map f xs
