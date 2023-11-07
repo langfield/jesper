@@ -65,3 +65,12 @@ _++_ : {A : Set} → List A → List A → List A
 map : {A B : Set} → (A → B) → List A → List B
 map _ [] = []
 map f (x :: xs) = f x :: map f xs
+
+data Maybe (A : Set) : Set where
+  just : A → Maybe A
+  nothing : Maybe A
+
+lookup : {A : Set} → List A → ℕ → Maybe A
+lookup [] _ = nothing
+lookup (x :: xs) 0 = just x
+lookup (x :: xs) (suc i) = lookup xs i
