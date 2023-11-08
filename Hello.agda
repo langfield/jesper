@@ -74,3 +74,23 @@ lookup : {A : Set} → List A → ℕ → Maybe A
 lookup [] _ = nothing
 lookup (x :: xs) 0 = just x
 lookup (x :: xs) (suc i) = lookup xs i
+
+data Vec (A : Set) : ℕ → Set where
+  []ᵥ : Vec A 0
+  _::ᵥ_ : {n : ℕ} → A → Vec A n → Vec A (suc n)
+infixr 5 _::ᵥ_
+
+downFrom : (n : ℕ) → Vec ℕ n
+downFrom 0 = []ᵥ
+downFrom (suc k) = k ::ᵥ downFrom k
+
+head : {A : Set}{n : ℕ} → Vec A (suc n) → A
+head (x ::ᵥ xs) = x
+
+tail : {A : Set}{n : ℕ} → Vec A (suc n) → Vec A n
+tail (x ::ᵥ xs) = xs
+
+-- | Dot product.
+_∙_ : {n : ℕ} → Vec ℕ n → Vec ℕ n → ℕ
+(x ::ᵥ xs) ∙ (y ::ᵥ ys) = x * y + xs ∙ ys
+[]ᵥ ∙ _ = 0
