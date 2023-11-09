@@ -94,3 +94,11 @@ tail (x ::ᵥ xs) = xs
 _∙_ : {n : ℕ} → Vec ℕ n → Vec ℕ n → ℕ
 (x ::ᵥ xs) ∙ (y ::ᵥ ys) = x * y + xs ∙ ys
 []ᵥ ∙ _ = 0
+
+_++ᵥ_ : {A : Set}{m n : ℕ} → Vec A m → Vec A n → Vec A (m + n)
+[]ᵥ ++ᵥ ys = ys
+(x ::ᵥ xs) ++ᵥ ys = x ::ᵥ (xs ++ᵥ ys)
+
+data Fin : ℕ → Set where
+  zero : {n : ℕ} → Fin (suc n)
+  suc  : {n : ℕ} → Fin n → Fin (suc n)
