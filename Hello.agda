@@ -102,3 +102,32 @@ _++ᵥ_ : {A : Set}{m n : ℕ} → Vec A m → Vec A n → Vec A (m + n)
 data Fin : ℕ → Set where
   zero : {n : ℕ} → Fin (suc n)
   suc  : {n : ℕ} → Fin n → Fin (suc n)
+
+lookupᵥ : {n : ℕ}{A : Set} → Vec A n → Fin n → A
+lookupᵥ (x ::ᵥ xs) zero = x
+lookupᵥ (x ::ᵥ xs) (suc i) = lookupᵥ xs i
+
+putᵥ : {A : Set}{n : ℕ} → Fin n → A → Vec A n → Vec A n
+putᵥ zero x' (x ::ᵥ xs) = (x' ::ᵥ xs)
+putᵥ (suc i) x' (x ::ᵥ xs) = x ::ᵥ (putᵥ i x' xs)
+
+data Σ (A : Set) (B : A → Set) : Set where
+  _,_ : (x : A) → B x → Σ A B
+
+_×'_ : (A B : Set) → Set
+A ×' B = Σ A (λ _ → B)
+
+×'→× : {A B : Set} → A ×' B → A × B
+×'→× (x , y) = x , y
+
+×→×' : {A B : Set} → A × B → A ×' B
+×→×' (x , y) = x , y
+
+List' : (A : Set) → Set
+List' A = Σ ℕ (Vec A)
+
+[]' : {A : Set} → List' A
+[]' = 0 , []ᵥ
+
+_::'_ : {A : Set} → A → List' A → List' A
+x ::' (n , xs) = suc n , x ::ᵥ xs
