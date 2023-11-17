@@ -131,3 +131,19 @@ List' A = Σ ℕ (Vec A)
 
 _::'_ : {A : Set} → A → List' A → List' A
 x ::' (n , xs) = suc n , x ::ᵥ xs
+
+[]→[]' : {A : Set} → List A → List' A
+[]→[]' [] = []'
+[]→[]' (x :: xs) = x ::' ([]→[]' xs)
+
+[]'→[] : {A : Set} → List' A → List A
+[]'→[] (zero , []ᵥ) = []
+[]'→[] (suc n , x ::ᵥ xs) = x :: ([]'→[] (n , xs))
+
+data Either (A B : Set) : Set where
+  left : A → Either A B
+  right : B → Either A B
+
+cases : {A B C : Set} → Either A B → (A → C) → (B → C) → C
+cases (left x)  f _ = f x
+cases (right x) _ g = g x
