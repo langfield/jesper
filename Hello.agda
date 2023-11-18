@@ -147,3 +147,6 @@ data Either (A B : Set) : Set where
 cases : {A B C : Set} → Either A B → (A → C) → (B → C) → C
 cases (left x)  f _ = f x
 cases (right x) _ g = g x
+
+data ⊤ : Set where
+  tt : ⊤
