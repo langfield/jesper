@@ -150,3 +150,18 @@ cases (right x) _ g = g x
 
 data ⊤ : Set where
   tt : ⊤
+
+data ⊥ : Set where
+  -- no constructors
+
+absurd : {A : Set} → ⊥ → A
+absurd ()
+
+A→B→A : {A B : Set} → A → B → A
+A→B→A a b = a
+
+A∨⊤→A∨⊥ : {A : Set} → A × ⊤ → Either A ⊥
+A∨⊤→A∨⊥ (a , _) = left a
+
+A→B→C→A×B→C : {A B C : Set} → (A → B → C) → A × B → C
+A→B→C→A×B→C f (a , b) = f a b
