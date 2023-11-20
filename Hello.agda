@@ -75,6 +75,8 @@ lookup [] _ = nothing
 lookup (x :: xs) 0 = just x
 lookup (x :: xs) (suc i) = lookup xs i
 
+-- TODO: Exercise 1.6.
+
 data Vec (A : Set) : ℕ → Set where
   []ᵥ : Vec A 0
   _::ᵥ_ : {n : ℕ} → A → Vec A n → Vec A (suc n)
@@ -165,3 +167,10 @@ A∨⊤→A∨⊥ (a , _) = left a
 
 A→B→C→A×B→C : {A B C : Set} → (A → B → C) → A × B → C
 A→B→C→A×B→C f (a , b) = f a b
+
+A×[B∨C]→[A×B]∨[A×C] : {A B C : Set} → A × (Either B C) → Either (A × B) (A × C)
+A×[B∨C]→[A×B]∨[A×C] (x , left b) = left (x , b)
+A×[B∨C]→[A×B]∨[A×C] (x , right c) = right (x , c)
+
+[A→C]×[B→D]→A×B→C×D : {A B C D : Set} → (A → C) × (B → D) → A × B → C × D
+[A→C]×[B→D]→A×B→C×D (f , g) (a , b) = f a , g b
