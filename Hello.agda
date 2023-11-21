@@ -75,7 +75,11 @@ lookup [] _ = nothing
 lookup (x :: xs) 0 = just x
 lookup (x :: xs) (suc i) = lookup xs i
 
--- TODO: Exercise 1.6.
+-- Exercise 1.6.
+-- Impossible to implement the nil case.
+-- mystery : {A : Set} → List A → ℕ → A
+-- mystery [] n = ?
+-- mystery (x :: xs) n = x
 
 data Vec (A : Set) : ℕ → Set where
   []ᵥ : Vec A 0
