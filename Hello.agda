@@ -178,3 +178,35 @@ A×[B∨C]→[A×B]∨[A×C] (x , right c) = right (x , c)
 
 [A→C]×[B→D]→A×B→C×D : {A B C D : Set} → (A → C) × (B → D) → A × B → C × D
 [A→C]×[B→D]→A×B→C×D (f , g) (a , b) = f a , g b
+
+-- We call `g`, which yields a value of type ⊥.
+-- So we must have:
+--  right (λ x → g (left x)) : Either P (P → ⊥)
+--
+-- And since this is a `right`, we must have:
+--  λ x → g (left x) : P → ⊥
+--
+-- And since we already know the type of `g`, we must have that:
+--  left x : Either P
+--
+-- And then:
+--  x : P
+--
+-- Which makes sense, since the lambda function above has type: P → ⊥
+f : {P : Set} → (Either P (P → ⊥) → ⊥) → ⊥
+f g = g (right (λ x → g (left x)))
+
+-- So the way to solve this problem is as follows:
+--
+-- 1. Read the type signature from right-to-left.
+-- 2. We need a value of type ⊥.
+-- 3. We can get a value of type ⊥ by calling g.
+-- 4. Thus we need a value of type Either P (P → ⊥).
+-- 5. We don't have a value of type P, so no luck there.
+-- 6. So we must construct a value of type P → ⊥.
+-- 7. So we have λ x = ? : P → ⊥.
+-- 8. Now we have a value of type P! It is x.
+-- 9. We were looking for that earlier, so now we can call g.
+-- 10. So we call g on left x.
+-- 11. And we get λ x = g (left x) : P → ⊥.
+-- 12. Then we call g again on that and we're done.
