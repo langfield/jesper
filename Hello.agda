@@ -210,3 +210,13 @@ f g = g (right (λ x → g (left x)))
 -- 10. So we call g on left x.
 -- 11. And we get λ x = g (left x) : P → ⊥.
 -- 12. Then we call g again on that and we're done.
+
+data IsEven : ℕ → Set where
+  zeroIsEven : IsEven zero
+  sucsucIsEven : {n : ℕ} → IsEven n → IsEven (suc (suc n))
+
+6-is-even : IsEven 6
+6-is-even = sucsucIsEven (sucsucIsEven (sucsucIsEven zeroIsEven))
+
+7-is-not-even : IsEven 7 → ⊥
+7-is-not-even (sucsucIsEven (sucsucIsEven (sucsucIsEven ())))
