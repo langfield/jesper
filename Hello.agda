@@ -220,3 +220,16 @@ data IsEven : ℕ → Set where
 
 7-is-not-even : IsEven 7 → ⊥
 7-is-not-even (sucsucIsEven (sucsucIsEven (sucsucIsEven ())))
+
+data _≡_ {A : Set} : A → A → Set where
+  refl : {x : A} → x ≡ x
+infix 4 _≡_
+
+one-plus-one : 1 + 1 ≡ 2
+one-plus-one = refl
+
+length-test1 : length (1 :: 2 :: []) ≡ 2
+length-test1 = refl
+
+length-test1 : length (1 :: 2 :: []) ≡ 2
+length-test1 = refl
