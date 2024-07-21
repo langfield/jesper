@@ -230,6 +230,3 @@ one-plus-one = refl
 
 length-test1 : length (1 :: 2 :: []) ≡ 2
 length-test1 = refl
-
-length-test1 : length (1 :: 2 :: []) ≡ 2
-length-test1 = refl
